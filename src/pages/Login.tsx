@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -11,12 +11,28 @@ import "../App.css";
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState({});
 
 	const navigate = useNavigate();
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
+		fetch(`${process.env.REACT_APP_API}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email, password }),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((error) => {
+				console.log(error);
+				// setErrorMessage(error.message)
+			});
 	};
 	return (
 		<>
@@ -34,14 +50,18 @@ const Login = () => {
 							Login to your account to continue.
 						</p>
 
-						<form onSubmit={handleSubmit}>
+						<form onSubmit={handleLogin}>
 							<Inputs
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
 								type="email"
 								placeholder="Email"
 								required
 								className="block px-2.5 pb-2.5 pt-4 w-full my-2 text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
 							/>
 							<Inputs
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
 								type="password"
 								placeholder="Password"
 								required
@@ -54,24 +74,24 @@ const Login = () => {
 									<span className="text-gray-500 text-sm font-thin">
 										Don't have an account?
 									</span>{" "}
-
 									<Link to="/register">
 										<span className="underline decoration-solid decoration-1 mb-2 sm:mb-0">
 											Create an account
 										</span>
 									</Link>
-                                    
 								</div>
 
 								<div className="font-thin text-indigo-700 hover:text-indigo-300 hover:duration-300 cursor-pointer">
 									Forgot password?
 								</div>
 							</div>
-							<Buttons className="flex w-full justify-center rounded-md gradient-bg px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 hover:opacity-90 hover:duration-300">
+							<Buttons 
+								className="flex w-full justify-center rounded-md gradient-bg px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 hover:opacity-90 hover:duration-300"								
+							>
 								<span>Login</span>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="w-7"
+									className="w-6"
 									viewBox="0 0 24 24"
 									strokeWidth="1.5"
 									stroke="#ffffff"
@@ -95,7 +115,10 @@ const Login = () => {
 						</p>
 						{/* Bottom Buttons Container */}
 						<div className="flex flex-col space-x-0 space-y-6 md:flex-row ">
-							<Buttons className="flex items-center justify-center w-full py-2 space-x-3 border border-gray-300 rounded shadow-sm hover:bg-opacity-30 hover:shadow-lg hover:-translate-y-0.5 transition duration-150">
+							<Buttons
+								type="button"
+								className="flex items-center justify-center w-full py-2 space-x-3 border border-gray-300 rounded shadow-sm hover:bg-opacity-30 hover:shadow-lg hover:-translate-y-0.5 transition duration-150"
+							>
 								<Img src="/img/google.png" alt="" className="w-9" />
 								<span className="font-thin">Google</span>
 							</Buttons>
