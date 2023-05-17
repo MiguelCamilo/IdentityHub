@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Inputs from "../components/Inputs";
 import Img from "../components/Img";
@@ -7,14 +9,15 @@ import Buttons from "../components/Buttons";
 import "../App.css";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+	const navigate = useNavigate();
 
-
-    }
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+	};
 	return (
 		<>
 			{/* Global Container */}
@@ -24,14 +27,26 @@ const Login = () => {
 					{/* Left Side */}
 					<div className="p-6 md:p-20 left-0">
 						{/* Top Content */}
-						<h2 className="font-mono mb-5 text-4xl font-bold">Login</h2>
+						<h2 className="font-mono mb-5 text-4xl font-bold">
+							Welcome back! 👋🏼
+						</h2>
 						<p className="max-w-sm mb-5 font-sans font-light text-gray-600">
-							Welcome back, login to your account!
+							Login to your account to continue.
 						</p>
 
 						<form onSubmit={handleSubmit}>
-							<Inputs type="email" placeholder="Email" required />
-							<Inputs type="password" placeholder="Password" required />
+							<Inputs
+								type="email"
+								placeholder="Email"
+								required
+								className="block px-2.5 pb-2.5 pt-4 w-full my-2 text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
+							/>
+							<Inputs
+								type="password"
+								placeholder="Password"
+								required
+								className="block px-2.5 pb-2.5 pt-4 w-full my-2 text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
+							/>
 
 							{/* Middle Content */}
 							<div className="flex flex-col items-center justify-between my-6 md:flex-row md:space-y-0">
@@ -39,9 +54,13 @@ const Login = () => {
 									<span className="text-gray-500 text-sm font-thin">
 										Don't have an account?
 									</span>{" "}
-									<span className="underline decoration-solid decoration-1 mb-2 sm:mb-0">
-										Create an account
-									</span>
+
+									<Link to="/register">
+										<span className="underline decoration-solid decoration-1 mb-2 sm:mb-0">
+											Create an account
+										</span>
+									</Link>
+                                    
 								</div>
 
 								<div className="font-thin text-indigo-700 hover:text-indigo-300 hover:duration-300 cursor-pointer">
@@ -68,7 +87,6 @@ const Login = () => {
 							</Buttons>
 						</form>
 
-                        
 						{/* Border */}
 						<div className="mt-12 border-b border-b-gray-300" />
 						{/* Bottom Content */}
