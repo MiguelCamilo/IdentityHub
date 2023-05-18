@@ -18,7 +18,6 @@ const Login = () => {
 		errors,
 		errorMessage,
 		handleLogin,
-		user
 	} = UserAuth();
 
 	const login = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -24,7 +24,6 @@ const AuthContext = React.createContext({
 	handleLogin: () => {null},
 	user: {} as User,
   });
-
   
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) => {
 	const [username, setUsername] = useState("");
@@ -54,8 +53,10 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 					});
 				} else {
 					res.json().then((data) => {
-						console.log(data);
+						// console.log(data);						
+						localStorage.setItem("AUTH", data.authentication.sessionToken)
 						setUser(data)
+						setErrors(false)
 						setErrorMessage("");
 					});
 				}
