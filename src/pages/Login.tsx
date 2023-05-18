@@ -1,52 +1,35 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import Inputs from "../components/Inputs";
 import Img from "../components/Img";
 import Buttons from "../components/Buttons";
 
-import { API_ROUTES } from "../env.config";
+import { UserAuth } from "../context/AuthContext";
 
 import "../App.css";
 
 const Login = () => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [errors, setErrors] = useState(false);
-	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	const {
+		email,
+		setEmail,
+		password,
+		setPassword,
+		errors,
+		errorMessage,
+		handleLogin,
+		user
+	} = UserAuth();
 
-	const navigate = useNavigate();
-
-	const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
-		fetch(API_ROUTES.LOGIN_API, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ email, password }),
-		})
-			.then((res) => {
-				if (!res.ok) {
-					res.json().then((data) => {
-						setErrors(true);
-						// data is an obj that has the key "message"
-						// so it shouldnt be data.error
-						setErrorMessage(data.message);
-					});
-				} else {
-					res.json().then((data) => {
-						console.log(data);
-						setErrorMessage(null);
-					});
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
+	const login = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		
+		try {
+			await handleLogin()
+		} catch (err) {
+			console.log(err)
+		}
+	}
 
 	return (
 		<>
@@ -62,13 +45,13 @@ const Login = () => {
 						</h2>
 						<p className="max-w-sm mb-5 font-sans font-light text-gray-600">
 							Login to your account to continue.
-						</p>
+						</p>						
 						{errorMessage && (
 							<div className="flex w-full justify-end">
 								<p className="text-sm font-bold text-red-600">{errorMessage}</p>
 							</div>
 						)}
-						<form onSubmit={handleLogin}>
+						<form onSubmit={login}>
 							<Inputs
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
@@ -86,7 +69,7 @@ const Login = () => {
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								type="password"
-								placeholder="Password"								
+								placeholder="Password"
 								className={`block px-2.5 pb-2.5 pt-4 w-full my-2 text-sm text-gray-900 bg-transparent rounded-lg border-2  appearance-none focus:outline-none focus:ring-0 peer ${
 									errors
 										? "border-red-600 focus:border-red-600"
@@ -139,9 +122,7 @@ const Login = () => {
 						</p>
 						{/* Bottom Buttons Container */}
 						<div className="flex flex-col space-x-0 space-y-6 md:flex-row ">
-							<Buttons								
-								className="flex items-center justify-center w-full py-2 space-x-3 border border-gray-300 rounded shadow-sm hover:bg-opacity-30 hover:shadow-lg hover:-translate-y-0.5 transition duration-150"
-							>
+							<Buttons className="flex items-center justify-center w-full py-2 space-x-3 border border-gray-300 rounded shadow-sm hover:bg-opacity-30 hover:shadow-lg hover:-translate-y-0.5 transition duration-150">
 								<Img src="/img/google.png" alt="" className="w-9" />
 								<span className="font-thin">Google</span>
 							</Buttons>

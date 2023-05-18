@@ -7,7 +7,6 @@ import Buttons from "../components/Buttons";
 
 import { API_ROUTES } from "../env.config";
 
-
 import "../App.css";
 
 const Register = () => {
@@ -56,10 +55,10 @@ const Register = () => {
 						<div className="p-6 md:p-20 left-0">
 							{/* Top Content */}
 							<h2 className="font-mono mb-5 text-4xl font-bold">
-								Come on in! 👋🏼
+								Glad you're here! 👋🏼
 							</h2>
 							<p className="max-w-md mb-5 font-sans font-light text-gray-600">
-								Glad you're here! Let's get you all set up, so you can start.
+								Let's get you your account set up.
 							</p>
 
 							{errorMessage && (
@@ -75,7 +74,7 @@ const Register = () => {
 									value={username}
 									onChange={(e) => setUsername(e.target.value)}
 									type="text"
-									placeholder="Name"									
+									placeholder="Name"
 									className={`block px-2.5 pb-2.5 pt-4 w-full my-2 text-sm text-gray-900 bg-transparent rounded-lg border-2  appearance-none focus:outline-none focus:ring-0 peer ${
 										errors
 											? "border-red-600 focus:border-red-600"
@@ -97,8 +96,8 @@ const Register = () => {
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									type="password"
-									placeholder="Password"									
-									className={`block px-2.5 pb-2.5 pt-4 w-full my-2 text-sm text-gray-900 bg-transparent rounded-lg border-2  appearance-none focus:outline-none focus:ring-0 peer ${
+									placeholder="Password"
+									className={`block px-2.5 pb-2.5 pt-4 w-full my-2 text-sm text-gray-900 bg-transparent rounded-lg border-2 appearance-none focus:outline-none focus:ring-0 peer ${
 										errors
 											? "border-red-600 focus:border-red-600"
 											: "border-gray-300 focus:border-indigo-600 "
