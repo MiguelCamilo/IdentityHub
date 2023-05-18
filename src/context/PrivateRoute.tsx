@@ -1,9 +1,14 @@
+import { Route, Routes } from "react-router-dom";
 
-export const PrivateRoute = () => {
+import { UserAuth } from "./AuthContext"
+
+const PrivateRoute = () => {
+    // if localStore returns null then user is not authenticated
+	// const isAuthenticated = localStorage.getItem("AUTH") !== null
 
     return (
         <>
-
+            
         </>
     )
 }
