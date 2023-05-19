@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Inputs from "../components/Inputs";
 import Img from "../components/Img";
@@ -20,11 +20,14 @@ const Login = () => {
 		handleLogin,
 	} = UserAuth();
 
+	const navigate = useNavigate()
+
 	const login = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		
 		try {
 			await handleLogin()
+			navigate("/dashboard")
 		} catch (err) {
 			console.log(err)
 		}
