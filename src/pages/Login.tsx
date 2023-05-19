@@ -27,6 +27,9 @@ const Login = () => {
 		
 		try {
 			await handleLogin()
+			
+			//TODO: BUG
+			//! DOES NOT NAVIGATE UNLESS PAGE IS REFRESHED
 			navigate("/dashboard")
 		} catch (err) {
 			console.log(err)

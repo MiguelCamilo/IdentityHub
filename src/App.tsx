@@ -18,6 +18,8 @@ function App() {
 		setIsAuthenticated(sessionToken !== null);
 	}, []);
 
+	//TODO: BUG
+	//!  DOES NOT NAVIGATE UNLESS PAGE IS REFRESHED / CHECK LOG IN ROUTE
 	useEffect(() => {
 		if (!isAuthenticated) {
 			navigate("/");
