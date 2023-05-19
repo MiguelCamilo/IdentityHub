@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 import { UserAuth } from "./AuthContext"
 
@@ -8,7 +8,7 @@ const PrivateRoute = () => {
 
     return (
         <>
-            
+
         </>
     )
 }
