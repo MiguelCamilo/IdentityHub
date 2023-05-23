@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import Inputs from "../components/Inputs";
 import Img from "../components/Img";
 import Buttons from "../components/Buttons";
