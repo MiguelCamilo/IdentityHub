@@ -11,5 +11,11 @@ export default {
       mono: ['Rokkitt', 'monospace'],
     },
   },
-  plugins: [],
+  plugins: [
+    require("daisyui"),
+  ],
+  daisyui: {
+    themes: false,
+  },
+ 
 }
