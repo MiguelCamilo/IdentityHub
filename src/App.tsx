@@ -20,9 +20,7 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		if (!isAuthenticated) {
-			navigate("/")
-		} else {
+		if (isAuthenticated) {
 			navigate("/dashboard")
 		}
 	},[isAuthenticated, navigate]);

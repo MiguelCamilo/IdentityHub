@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { API_ROUTES } from "../env.config";
 
@@ -38,6 +39,9 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 		setEmail("")
 		setPassword("")
 	}
+
+	const navigate = useNavigate()
+
 	const handleLogin = () => {
 
 		fetch(API_ROUTES.LOGIN_API, {
@@ -62,7 +66,8 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 						setUser(data)
 						setErrors(false)
 						setErrorMessage("");
-						handleClearInputs()						
+						handleClearInputs()		
+						navigate("/dashboard")
 					});
 				}
 			})

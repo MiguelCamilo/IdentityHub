@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 import Inputs from "../components/Inputs";
 import Img from "../components/Img";
@@ -12,7 +11,7 @@ interface LoginProps {
   }
   
 
-const Login: React.FC <LoginProps> = ({ setIsAuthenticated }) => {
+const Login: React.FC <LoginProps> = () => {
 	const {
 		email,
 		setEmail,
@@ -22,8 +21,6 @@ const Login: React.FC <LoginProps> = ({ setIsAuthenticated }) => {
 		errorMessage,
 		handleLogin,
 	} = UserAuth();
-
-	const navigate = useNavigate()
 
 	const login = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
