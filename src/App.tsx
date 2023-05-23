@@ -10,29 +10,28 @@ import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const navigate = useNavigate();
 
+	const navigate = useNavigate()
+	
 	useEffect(() => {
 		const sessionToken = localStorage.getItem("AUTH");
 		// if localStore returns null then user is not authenticated
 		setIsAuthenticated(sessionToken !== null);
 	}, []);
 
-	//TODO: BUG
-	//!  DOES NOT NAVIGATE UNLESS PAGE IS REFRESHED / CHECK LOG IN ROUTE
 	useEffect(() => {
 		if (!isAuthenticated) {
-			navigate("/");
+			navigate("/")
 		} else {
-			navigate("/dashboard");
+			navigate("/dashboard")
 		}
-	}, [isAuthenticated, navigate]);
+	},[isAuthenticated, navigate]);
 
 	return (
 		<AuthContextProvider>
 			<Routes>
 				<Route path="/register" element={<Register />} />
-				<Route path="/" element={<Login />} />
+				<Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
 
 				<Route
 					path="/dashboard"

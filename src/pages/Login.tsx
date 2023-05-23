@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Inputs from "../components/Inputs";
 import Img from "../components/Img";
 import Buttons from "../components/Buttons";
-
 import { UserAuth } from "../context/AuthContext";
-
 import "../App.css";
 
-const Login = () => {
+interface LoginProps {
+	setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  }
+  
+
+const Login: React.FC <LoginProps> = ({ setIsAuthenticated }) => {
 	const {
 		email,
 		setEmail,
@@ -24,13 +27,8 @@ const Login = () => {
 
 	const login = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		
 		try {
-			await handleLogin()
-			
-			//TODO: BUG
-			//! DOES NOT NAVIGATE UNLESS PAGE IS REFRESHED
-			navigate("/dashboard")
+			await handleLogin()	
 		} catch (err) {
 			console.log(err)
 		}

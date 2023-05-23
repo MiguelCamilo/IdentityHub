@@ -1,5 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import { API_ROUTES } from "../env.config";
 
@@ -14,11 +13,11 @@ type User = {
 
 const AuthContext = React.createContext({
 	username: "",
-	setUsername: (() => {""}) as Dispatch<SetStateAction<string>>,
+	setUsername: (() => {""}) as React.Dispatch<React.SetStateAction<string>>,
 	email: "",
-	setEmail: (() => {""}) as Dispatch<SetStateAction<string>>,
+	setEmail: (() => {""}) as React.Dispatch<React.SetStateAction<string>>,
 	password: "",
-	setPassword: (() => {""}) as Dispatch<SetStateAction<string>>,
+	setPassword: (() => {""}) as React.Dispatch<React.SetStateAction<string>>,
 	errors: false,
 	errorMessage: "",
 	handleLogin: () => {null},
@@ -34,6 +33,11 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 	const [errors, setErrors] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 
+	const handleClearInputs = () => {
+		setUsername("")
+		setEmail("")
+		setPassword("")
+	}
 	const handleLogin = () => {
 
 		fetch(API_ROUTES.LOGIN_API, {
@@ -58,6 +62,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 						setUser(data)
 						setErrors(false)
 						setErrorMessage("");
+						handleClearInputs()						
 					});
 				}
 			})

@@ -9,6 +9,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   isAuthenticated,
   children,
 }) => {
+  
   return isAuthenticated ? <>{children}</> : null;
 };
 

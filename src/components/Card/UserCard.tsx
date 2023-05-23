@@ -1,7 +1,9 @@
 
 const UserCard = () => {
   return (
-    <div>UserCard</div>
+    <div className="h-screen w-screen bg-sky-300">
+      <div>UserCard</div>
+    </div>
   )
 }
 
