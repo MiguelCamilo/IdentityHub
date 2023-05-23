@@ -1,7 +1,5 @@
-import { useState } from "react";
 
 const UserCard = () => {
-	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<div className="h-screen w-screen flex justify-center items-center">
 			<div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">

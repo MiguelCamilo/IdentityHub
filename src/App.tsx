@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import UserCard from "./components/Card/UserCard";
+import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./context/ProtectedRoute";
 import { AuthContextProvider } from "./context/AuthContext";
 
@@ -35,7 +35,7 @@ function App() {
 					path="/dashboard"
 					element={
 						<ProtectedRoute isAuthenticated={isAuthenticated}>
-							<UserCard />
+							<Dashboard />
 						</ProtectedRoute>
 					}
 				/>
