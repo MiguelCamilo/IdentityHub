@@ -1,10 +1,7 @@
 import { useState } from "react";
 
-import { UserAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-	const { user } = UserAuth()
-	console.log(user)
 	return (
 		<>
 			<div className="navbar bg-indigo-600">
@@ -22,7 +19,7 @@ const Navbar = () => {
 							/>
 							<div>
 								<h1 className="text-base font-semibold text-gray-700 capitalize dark:text-white">
-									{user && user?.username}
+									{/* {user && user?.username} */}
 								</h1>
 								<p className="text-xs text-gray-300">
 									miajohn@merakiui.com

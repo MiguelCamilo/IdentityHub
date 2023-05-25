@@ -29,7 +29,7 @@ function App() {
 		<AuthContextProvider>
 			<Routes>
 				<Route path="/register" element={<Register />} />
-				<Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+				<Route path="/" element={<Login />} />
 
 				<Route
 					path="/dashboard"

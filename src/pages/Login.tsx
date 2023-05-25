@@ -5,12 +5,9 @@ import Buttons from "../components/Buttons";
 import { UserAuth } from "../context/AuthContext";
 import "../App.css";
 
-interface LoginProps {
-	setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-  }
   
 
-const Login: React.FC <LoginProps> = () => {
+const Login = () => {
 	const {
 		email,
 		setEmail,
@@ -19,6 +16,7 @@ const Login: React.FC <LoginProps> = () => {
 		errors,
 		errorMessage,
 		handleLogin,
+		user
 	} = UserAuth();
 
 	const login = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,6 +39,7 @@ const Login: React.FC <LoginProps> = () => {
 						{/* Top Content */}
 						<h2 className="font-mono mb-5 text-4xl font-bold">
 							Welcome back! 👋🏼
+							{user && user?.username}
 						</h2>
 						<p className="max-w-sm mb-5 font-sans font-light text-gray-600">
 							Login to your account to continue.
