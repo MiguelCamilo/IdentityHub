@@ -4,45 +4,31 @@ import { Link } from "react-router-dom";
 import Inputs from "../components/Inputs";
 import Img from "../components/Img";
 import Buttons from "../components/Buttons";
-
-import { API_ROUTES } from "../env.config";
+import { UserAuth } from "../context/AuthContext";
 
 import "../App.css";
 
 const Register = () => {
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [errors, setErrors] = useState(false);
-	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	const {
+		username,
+		setUsername,
+		email,
+		setEmail,
+		password,
+		setPassword,
+		errors,
+		errorMessage,
+		handleRegister,
+	} = UserAuth();
 
-	const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
-		fetch(API_ROUTES.REGISTER_API, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ email, password, username }),
-		})
-			.then((res) => {
-				if (!res.ok) {
-					res.json().then((data) => {
-						setErrors(true);
-						setErrorMessage(data.message);
-					});
-				} else {
-					res.json().then((data) => {
-						console.log(data);
-						setErrorMessage(null);
-					});
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
+	const  register = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		try {
+			await handleRegister()
+		} catch (error){
+			console.log(error)
+		}
+	}
 
 	return (
 		<>
@@ -69,7 +55,7 @@ const Register = () => {
 								</div>
 							)}
 
-							<form onSubmit={handleRegister}>
+							<form onSubmit={register}>
 								<Inputs
 									value={username}
 									onChange={(e) => setUsername(e.target.value)}
@@ -156,7 +142,7 @@ const Register = () => {
 							</div>
 						</div>
 						{/* Right Side */}
-						<div className="h-full w-[50%] fixed z-[1] top-0 overflow-hidden right-0">
+						<div className="h-full w-[50%] fixed -z-[1] top-0 overflow-hidden right-0">
 							<div className="w-full h-full gradient-bg hidden md:block" />
 						</div>
 					</div>

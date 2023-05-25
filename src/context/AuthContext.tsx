@@ -22,6 +22,7 @@ const AuthContext = React.createContext({
 	errors: false,
 	errorMessage: "",
 	handleLogin: () => {null},
+	handleRegister: () => {null},
 	user: {} as User,
   });
   
@@ -75,6 +76,39 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 				console.log(error);
 			});
 	};
+
+	const handleRegister = () => {
+
+		fetch(API_ROUTES.REGISTER_API, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email, password, username }),
+		})
+			.then((res) => {
+				if (!res.ok) {
+					res.json().then((data) => {
+						setErrors(true);
+						setErrorMessage(data.message);
+					});
+				} else {
+					res.json().then((data) => {
+						// console.log(data);
+						localStorage.setItem("AUTH", data.authentication.sessionToken)
+						setUser(data)
+						setErrors(false)
+						setErrorMessage("");
+						handleClearInputs()		
+						navigate("/dashboard")
+					});
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+	
     
 	return (
 		<>
@@ -89,6 +123,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 					errors,
 					errorMessage,
 					handleLogin,
+					handleRegister,
 					user,
 				}}
 			>

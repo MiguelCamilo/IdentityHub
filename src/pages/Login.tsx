@@ -25,8 +25,8 @@ const Login: React.FC <LoginProps> = () => {
 		e.preventDefault()
 		try {
 			await handleLogin()	
-		} catch (err) {
-			console.log(err)
+		} catch (error) {
+			console.log(error)
 		}
 	}
 
@@ -121,14 +121,14 @@ const Login: React.FC <LoginProps> = () => {
 						</p>
 						{/* Bottom Buttons Container */}
 						<div className="flex flex-col space-x-0 space-y-6 md:flex-row ">
-							<Buttons className="flex items-center justify-center w-full py-2 space-x-3 border border-gray-300 rounded shadow-sm hover:bg-opacity-30 hover:shadow-lg hover:-translate-y-0.5 transition duration-150">
+							<Buttons className="flex items-center justify-center w-full py-2 space-x-3 border-2 border-gray-800 rounded-lg shadow-sm hover:bg-gray-100 hover:shadow-lg hover:-translate-y-0.5 transition duration-200">
 								<Img src="/img/google.png" alt="" className="w-9" />
-								<span className="font-thin">Google</span>
+								<span className="font-bold text-lg text-gray-600">Google</span>
 							</Buttons>
 						</div>
 					</div>
 					{/* Right Side */}
-					<div className="h-full w-[50%] fixed z-[1] top-0 overflow-hidden right-0">
+					<div className="h-full w-[50%] fixed -z-[1] top-0 overflow-hidden right-0">
 						<div className="w-full h-full gradient-bg hidden md:block" />
 					</div>
 				</div>
