@@ -6,13 +6,11 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./context/ProtectedRoute";
-import { AuthContextProvider } from "./context/AuthContext";
-
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-	const navigate = useNavigate()
-	
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		const sessionToken = localStorage.getItem("AUTH");
 		// if localStore returns null then user is not authenticated
@@ -21,26 +19,24 @@ function App() {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			navigate("/dashboard")
+			navigate("/dashboard");
 		}
-	},[isAuthenticated, navigate]);
+	}, [isAuthenticated, navigate]);
 
 	return (
-		<AuthContextProvider>
-			<Routes>
-				<Route path="/register" element={<Register />} />
-				<Route path="/" element={<Login />} />
+		<Routes>
+			<Route path="/register" element={<Register />} />
+			<Route path="/" element={<Login />} />
 
-				<Route
-					path="/dashboard"
-					element={
-						<ProtectedRoute isAuthenticated={isAuthenticated}>
-							<Dashboard />
-						</ProtectedRoute>
-					}
-				/>
-			</Routes>
-		</AuthContextProvider>
+			<Route
+				path="/dashboard"
+				element={
+					<ProtectedRoute isAuthenticated={isAuthenticated}>
+						<Dashboard />
+					</ProtectedRoute>
+				}
+			/>
+		</Routes>
 	);
 }
 

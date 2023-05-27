@@ -16,13 +16,13 @@ const Login = () => {
 		errors,
 		errorMessage,
 		handleLogin,
-		user
 	} = UserAuth();
 
 	const login = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		try {
-			await handleLogin()	
+			const response = await handleLogin()	
+			return response
 		} catch (error) {
 			console.log(error)
 		}
@@ -38,8 +38,7 @@ const Login = () => {
 					<div className="p-6 md:p-20 left-0">
 						{/* Top Content */}
 						<h2 className="font-mono mb-5 text-4xl font-bold">
-							Welcome back! 👋🏼
-							{user && user?.username}
+							Welcome back! 👋🏼							
 						</h2>
 						<p className="max-w-sm mb-5 font-sans font-light text-gray-600">
 							Login to your account to continue.

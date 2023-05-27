@@ -9,42 +9,53 @@ interface AuthContextProviderProps {
 
 type User = {
 	username: string;
-	email: string
-}
+	email: string;
+};
 
 const AuthContext = React.createContext({
 	username: "",
-	setUsername: (() => {""}) as React.Dispatch<React.SetStateAction<string>>,
+	setUsername: (() => {
+		("");
+	}) as React.Dispatch<React.SetStateAction<string>>,
 	email: "",
-	setEmail: (() => {""}) as React.Dispatch<React.SetStateAction<string>>,
+	setEmail: (() => {
+		("");
+	}) as React.Dispatch<React.SetStateAction<string>>,
 	password: "",
-	setPassword: (() => {""}) as React.Dispatch<React.SetStateAction<string>>,
+	setPassword: (() => {
+		("");
+	}) as React.Dispatch<React.SetStateAction<string>>,
 	errors: false,
 	errorMessage: "",
-	handleLogin: () => {null},
-	handleRegister: () => {null},
+	handleLogin: () => {
+		null;
+	},
+	handleRegister: () => {
+		null;
+	},
 	user: {} as User,
-  });
-  
-export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) => {
+});
+
+export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
+	children,
+}) => {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const [user, setUser] = useState <User> ({} as User);
+	const [user, setUser] = useState<User>({} as User);
 	const [errors, setErrors] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 
 	const handleClearInputs = () => {
-		setUsername("")
-		setEmail("")
-		setPassword("")
-	}
+		setUsername("");
+		setEmail("");
+		setPassword("");
+	};
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const handleLogin = () => {
-
 		fetch(API_ROUTES.LOGIN_API, {
 			method: "POST",
 			headers: {
@@ -62,13 +73,12 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 					});
 				} else {
 					res.json().then((data) => {
-						// console.log(data);						
-						localStorage.setItem("AUTH", data.authentication.sessionToken)
-						setUser(data)
-						setErrors(false)
+						// console.log(data);
+						localStorage.setItem("AUTH", data.authentication.sessionToken);
+						setUser(data);						
+						setErrors(false);
 						setErrorMessage("");
-						handleClearInputs()		
-						navigate("/dashboard")
+						handleClearInputs();
 					});
 				}
 			})
@@ -78,7 +88,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 	};
 
 	const handleRegister = () => {
-
 		fetch(API_ROUTES.REGISTER_API, {
 			method: "POST",
 			headers: {
@@ -95,12 +104,11 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 				} else {
 					res.json().then((data) => {
 						// console.log(data);
-						localStorage.setItem("AUTH", data.authentication.sessionToken)
-						setUser(data)
-						setErrors(false)
+						localStorage.setItem("AUTH", data.authentication.sessionToken);
+						setUser(data);
+						setErrors(false);
 						setErrorMessage("");
-						handleClearInputs()		
-						navigate("/dashboard")
+						handleClearInputs();
 					});
 				}
 			})
@@ -108,8 +116,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 				console.log(error);
 			});
 	};
-	
-    
+
 	return (
 		<>
 			<AuthContext.Provider
@@ -134,5 +141,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
 };
 
 export const UserAuth = () => {
-	return useContext(AuthContext);
+  return useContext(AuthContext);
 };
+
